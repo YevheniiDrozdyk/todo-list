@@ -4,6 +4,7 @@ import AppHeader from '../AppHeader';
 import SearchPanel from '../SearchPanel';
 import ItemStatusFilter from '../ItemStatusFilter';
 import TodoList from '../TodoList';
+import AddItem from '../AddItem';
 
 import './styles.css';
 
@@ -15,6 +16,16 @@ export default class App extends Component {
             {label: 'Make Awesome App', important: true, id: 2},
             {label: 'Have a lunch', important: false, id: 3}
         ]
+    };
+
+    addItem = () => {
+        this.setState(({todoData}) => {
+            const id = 1 + Math.max.apply(null, todoData.map((el) => el.id));
+            const newElement = {label: 'Go to sleep now', important: false, id};
+            return {
+                todoData: [...todoData, newElement]
+            }
+        });
     };
 
     deleteItem = (id) => {
@@ -38,6 +49,7 @@ export default class App extends Component {
                     <ItemStatusFilter/>
                 </div>
                 <TodoList items={this.state.todoData} onDeleted={this.deleteItem}/>
+                <AddItem onAdded={this.addItem}/>
             </div>
         );
     }
