@@ -10,7 +10,7 @@ export default class AddItemForm extends Component {
     onLabelChange = (event) => {
         this.setState({
             label: event.target.value
-        })
+        });
     };
 
     onSubmit = (event) => {
